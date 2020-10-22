@@ -5,6 +5,8 @@
  */
 package projetohibernate.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -39,6 +42,9 @@ public class Livro {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "IDFK_EDITORA", referencedColumnName = "ID_EDITORA")
     private Editora editora;
+    
+    @ManyToMany(mappedBy = "livros")
+    private List<Autor> autores;
 
     public int getId() {
         return id;
@@ -80,8 +86,17 @@ public class Livro {
         this.editora = editora;
     }
 
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+    
     public Livro() {
         setEditora(new Editora());
+        setAutores(new ArrayList<>());
     }
     
     
