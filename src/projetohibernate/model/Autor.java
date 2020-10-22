@@ -12,6 +12,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,19 +30,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "AUTOR")
 public class Autor {
-    
+
     @Id
-    @Column(name = "ID_AUTOR", nullable = false)
+    @Column(name = "ID_AUTOR")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @Column(name = "NOME", nullable = false, length = 100)
     private String nome;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "IDFK_AUTOR", referencedColumnName = "ID_AUTOR")
-    private Set<Email> emails;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "IDFK_AUTOR")
+    private List<Email> emails;
     
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "AUTORIA_LIVRO",
+            joinColumns = {@JoinColumn(name = "IDFK_AUTOR")},
+            inverseJoinColumns = {@JoinColumn(name = "IDFK_LIVRO")}
+    )
+    private List<Livro> livros;
+
     public int getId() {
         return id;
     }
@@ -57,15 +67,24 @@ public class Autor {
         this.nome = nome;
     }
 
-    public Set<Email> getEmails() {
+    public List<Email> getEmails() {
         return emails;
     }
 
-    public void setEmails(Set<Email> emails) {
+    public void setEmails(List<Email> emails) {
         this.emails = emails;
     }
 
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
+    
     public Autor() {
-        setEmails(new HashSet<>());
+        setEmails(new ArrayList<>());
+        setLivros(new ArrayList<>());
     }
 }
