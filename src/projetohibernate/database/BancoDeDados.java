@@ -11,7 +11,6 @@ import projetohibernate.database.dao.AutorDao;
 import projetohibernate.database.dao.EditoraDao;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.hibernate.jpa.HibernatePersistenceProvider;
 import projetohibernate.database.manipulador.ManipuladorDeAutor;
 import projetohibernate.database.manipulador.ManipuladorDeEditora;
 import projetohibernate.database.manipulador.ManipuladorDeLivro;

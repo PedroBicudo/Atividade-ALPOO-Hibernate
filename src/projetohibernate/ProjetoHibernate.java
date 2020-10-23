@@ -6,16 +6,7 @@
 package projetohibernate;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import org.eclipse.persistence.jpa.PersistenceProvider;
-import org.hibernate.jpa.HibernatePersistenceProvider;
 import projetohibernate.database.BancoDeDados;
 import projetohibernate.database.dao.BancoDeDadosDao;
 import projetohibernate.model.Autor;
