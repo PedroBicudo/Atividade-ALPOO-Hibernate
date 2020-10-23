@@ -33,7 +33,7 @@ public class Autor {
 
     @Id
     @Column(name = "ID_AUTOR")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
     @Column(name = "NOME", nullable = false, length = 100)
@@ -42,13 +42,8 @@ public class Autor {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "IDFK_AUTOR")
     private List<Email> emails;
-    
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "AUTORIA_LIVRO",
-            joinColumns = {@JoinColumn(name = "IDFK_AUTOR")},
-            inverseJoinColumns = {@JoinColumn(name = "IDFK_LIVRO")}
-    )
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "autores")
     private List<Livro> livros;
 
     public int getId() {
